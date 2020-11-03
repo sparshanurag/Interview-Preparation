@@ -1,0 +1,68 @@
+#include<iostream>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node* next;
+    Node(int new_data)
+    {
+        this->data =new_data;
+        next = NULL;
+    }
+};
+
+void Insert(Node** head, int new_data)
+{
+    Node* temp = new Node(new_data);
+    temp->next = *head;
+    *head = temp;
+    
+}
+
+void Delete(Node**head, int X)
+{
+    Node* temp = *head;
+    Node*prev = NULL;
+    
+    while(temp!=NULL && temp->data!=X)
+    {
+        prev =temp;
+        temp = temp ->next;
+    }
+    
+    if(temp==NULL)
+        return;
+        
+    prev->next = temp ->next;
+    delete temp;
+    
+}
+
+void printList(Node* head)
+{
+    while(head!=NULL)
+    {
+        cout<<head->data<<" ";
+        head = head->next;
+    }
+}
+
+int main(){
+    
+    Node*head =NULL;
+    
+    Insert(&head, 7);
+    Insert(&head, 1);
+    Insert(&head, 3);
+    Insert(&head, 2);
+    
+    printList(head);
+    cout<<endl;
+    Delete(&head, 3);
+    
+    printList(head);
+    
+    return 0;
+    
+}
